@@ -1,3 +1,18 @@
+# B+ Tree的特点
+叶节点（leaf pages）数据做冗余，最后一层叶节点双向指针，方便于范围搜索
+
+# Mysql 自带的分区功能
+假如我们现在要删除2016年到2017年间一年的数据，因为我们已经做了分区，所以只需要通过一条语句，删除p0分区即可
+`ALTER TABLE customer_login_log DROP PARTITION p0;`
+
+建表并交换分区
+``` ALTER TABLE customer_login_log 
+ exchange PARTITION p1 WITH TABLE arch_customer_login_log;
+```
+
+最后我们将归档数据的存储引擎改为归档引擎，命令为
+`ALTER TABLE customer_login_log ENGINE=ARCHIVE;`
+
 # MySQL 中 MyISAM 和 InnoDB 的区别
 
 MyISAM 和 InnoDB 是 MySQL 最常用的两种存储引擎，它们在功能、性能和适用场景上有显著差异。以下是主要区别：
